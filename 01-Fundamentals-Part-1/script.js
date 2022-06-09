@@ -174,3 +174,25 @@ if (dolphinScore > koalaScore && dolphinScore >= 100) {
 } else if (koalaScore === dolphinScore && koalaScore >= 100 && dolphinScore >= 100) {
     console.log("koalas and dolphins draw");
 }
+
+
+//switch statement
+const day = "Monday";
+switch (day) {
+    case "Monday":
+        console.log("here is what to do on Monday");
+        break;
+    case "Tuesday":
+        console.log("Here is what to do on Tuesday");
+        break;
+    case "Wednesday":
+        console.log("Here is what to do on Wednesday");
+        break;
+    case "Thursday":
+        console.log("Here what to do on Thursday");
+        break;
+
+    default:
+        console.log("Here is an default answer");
+        break;
+}
