@@ -67,3 +67,9 @@ console.log(bmiJohn);
 // test to see wehther mark has higher BMI than John
 let bmiHigh = bmiMark >= bmiJohn; // it will return boolean (true or false)
 console.log(bmiHigh, bmiMark, bmiJohn);
+
+//Strings and Template Literals
+const bilalDetails = `My name is ${firstName} and i am currently a ${currentJob}. My age is ${ageBilal}!`;
+console.log(bilalDetails);
+//Multiline strings ( we use \N\)
+console.log(`here is a multiline example \n\here is the next line!`);
