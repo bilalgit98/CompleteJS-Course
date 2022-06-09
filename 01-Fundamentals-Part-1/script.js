@@ -8,3 +8,12 @@ console.log(firstName);
 
 let myFirstJob = "student";
 console.log(myFirstJob);
+
+// variables
+let country = "England";
+let continent = "Europe";
+let population = 10;
+
+console.log(country);
+console.log(continent);
+console.log(population);
