@@ -161,3 +161,16 @@ if (shouldDrive) {
 } else {
     console.log("You cannot drive!");
 }
+
+//coding challenge 3
+const dolphinScore = (96 + 108 + 89) / 3;
+const koalaScore = (88 + 91 + 110) / 3;
+console.log(dolphinScore, koalaScore);
+
+if (dolphinScore > koalaScore && dolphinScore >= 100) {
+    console.log("Dolphis win");
+} else if (koalaScore > dolphinScore && koalaScore >= 100) {
+    console.log("koalas win");
+} else if (koalaScore === dolphinScore && koalaScore >= 100 && dolphinScore >= 100) {
+    console.log("koalas and dolphins draw");
+}
