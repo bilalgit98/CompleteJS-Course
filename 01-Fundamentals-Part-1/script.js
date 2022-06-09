@@ -29,3 +29,14 @@ console.log(typeof continent);
 console.log(typeof population);
 
 console.log(typeof country, typeof continent, typeof population);
+
+//const and var of declaring variables.
+let age = 25;
+age = 19;
+console.log(age)
+
+const birthYear = 2002;
+console.log(birthYear, typeof birthYear);
+
+var currentJob = "Student Programmer!"
+console.log(currentJob, typeof currentJob);
