@@ -129,3 +129,19 @@ if (height) {
 } else {
     console.log("Height is undefined");
 }
+
+//equality operators
+const ageNow = "20";
+if (ageNow === 20) console.log('You are 20 (strict)');
+if (ageNow == 20) console.log("You are 20 (loose)");
+
+const favouriteNumb = Number(prompt("Please enter your favourite number?"));
+console.log(typeof favouriteNumb, favouriteNumb);
+
+if (favouriteNumb === 23) {
+    console.log("Nice! 23 is a good number.");
+} else if (favouriteNumb === 21) {
+    console.log('21 is a cool number to choose!!');
+} else {
+    console.log("The number you have selected is not 23 or 21");
+}
