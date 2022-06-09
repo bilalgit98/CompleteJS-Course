@@ -145,3 +145,19 @@ if (favouriteNumb === 23) {
 } else {
     console.log("The number you have selected is not 23 or 21");
 }
+
+//logic Operators
+const hasDriversLicense = true;//A
+const hasGoodVision = true;//B
+console.log(hasDriversLicense && hasGoodVision);//and
+console.log(hasDriversLicense || hasGoodVision);//or
+console.log(!hasDriversLicense); //not
+
+const shouldDrive = hasDriversLicense && hasGoodVision;
+console.log(shouldDrive);// should be true
+
+if (shouldDrive) {
+    console.log("You are able to drive!");
+} else {
+    console.log("You cannot drive!");
+}
