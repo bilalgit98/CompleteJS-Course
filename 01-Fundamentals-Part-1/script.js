@@ -107,3 +107,25 @@ console.log(Number(inputYear) + 2);
 //type coercion
 console.log('I am ' + 23 + ' years old');
 console.log('10' * '4');
+
+//truthy and falsy values 0,'' , undefined , null, NaN
+console.log(Boolean(0));//false
+console.log(Boolean(undefined));//false
+console.log(Boolean('Bilal'));//true
+console.log(Boolean({}));//true
+console.log(Boolean(''));//false
+
+const money = 0;
+if (money) {// the function will make "money" into a boolean to see true or false
+    console.log("You have money");
+}
+else {
+    console.log("You have no money");
+}
+
+let height;
+if (height) {
+    console.log("Height is defined");
+} else {
+    console.log("Height is undefined");
+}
