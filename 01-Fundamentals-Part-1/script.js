@@ -202,3 +202,8 @@ const ageOperator = 21;
 const ageCheck = age >= 18 ? console.log("Age is above 18") : // if part.
     console.log("Age is below 18!");// else part
 console.log(ageCheck);
+
+//coding challenge 4
+const billValue = 275
+const tip = billValue <= 300 && billValue >= 50 ? billValue * 0.15 : billValue * 0.2;
+console.log(`The bill was ${billValue} , the tip value is ${tip}, and the total value is ${billValue + tip}`);
