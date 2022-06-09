@@ -98,3 +98,12 @@ if (bmiJohn >= bmiMark) {
 } else {
     console.log(`Mark's BMI is higher than John's BMI, Johns BMI is ${bmiMark}`)
 }
+
+//type converstion or coercion
+// converting a string to a number
+const inputYear = '2022';
+console.log(typeof inputYear);
+console.log(Number(inputYear) + 2);
+//type coercion
+console.log('I am ' + 23 + ' years old');
+console.log('10' * '4');
