@@ -46,3 +46,24 @@ const currentYear = 2022;
 const ageBilal = currentYear - 2002;
 console.log(ageBilal);
 console.log(ageBilal * 2);
+
+
+//coding challenge 1 
+//test data 1 mark
+const markMass = 78;
+const markHeight = 1.69;
+//test data 2 john
+const johnMass = 92;
+const johnHeight = 1.95;
+
+//bmi calculation for mark
+let bmiMark = markMass / markHeight ** 2 / markHeight * markHeight;
+console.log(bmiMark);
+
+// bmi calculation for john
+let bmiJohn = johnMass / johnHeight ** 2 / johnHeight * johnHeight;
+console.log(bmiJohn);
+
+// test to see wehther mark has higher BMI than John
+let bmiHigh = bmiMark >= bmiJohn; // it will return boolean (true or false)
+console.log(bmiHigh, bmiMark, bmiJohn);
