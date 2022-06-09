@@ -73,3 +73,28 @@ const bilalDetails = `My name is ${firstName} and i am currently a ${currentJob}
 console.log(bilalDetails);
 //Multiline strings ( we use \N\)
 console.log(`here is a multiline example \n\here is the next line!`);
+
+//Taking decisions with code if statements
+const currentAge = 17;
+if (currentAge >= 18) {
+    console.log("You are able to drive!");
+} else {
+    console.log(`You are not able to drive, please wait ${18 - currentAge} years!`);
+}
+
+// another example (for century) 
+let century;
+if (birthYear <= 2000) {
+    century = 20;
+    console.log(`You were born in the ${century}th century!`)
+} else {
+    century = 21;
+    console.log(`You were born in the ${century}th century!`)
+}
+
+//coding challenge 2 (BMI)
+if (bmiJohn >= bmiMark) {
+    console.log(`John's BMI is higher than Marks BMI, Johns BMI is ${bmiJohn}`)
+} else {
+    console.log(`Mark's BMI is higher than John's BMI, Johns BMI is ${bmiMark}`)
+}
