@@ -196,3 +196,9 @@ switch (day) {
         console.log("Here is an default answer");
         break;
 }
+
+//Conditional ternary operator
+const ageOperator = 21;
+const ageCheck = age >= 18 ? console.log("Age is above 18") : // if part.
+    console.log("Age is below 18!");// else part
+console.log(ageCheck);
