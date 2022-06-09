@@ -40,3 +40,9 @@ console.log(birthYear, typeof birthYear);
 
 var currentJob = "Student Programmer!"
 console.log(currentJob, typeof currentJob);
+
+//basic operators
+const currentYear = 2022;
+const ageBilal = currentYear - 2002;
+console.log(ageBilal);
+console.log(ageBilal * 2);
