@@ -43,3 +43,20 @@ const yearsUnilRetirement = (birthYear, fullName) => {
 }
 
 console.log(yearsUnilRetirement(2002, "Bilal"));
+
+//Functions calling other functions
+function cutFruit(fruit) {
+    return fruit * 4;
+}
+
+function fruitProcessor(Oranges, lime) {
+    console.log(Oranges, lime);// this will log the amount of oranges and limes inputted to the function.
+    const orangePieces = cutFruit(Oranges);
+    const LimePieces = cutFruit(lime);
+
+
+    const Juice = `Here is a juice with ${orangePieces} oranges pieces and ${LimePieces} lime pieces`;
+    return Juice;
+}
+
+console.log(fruitProcessor(6, 4));
