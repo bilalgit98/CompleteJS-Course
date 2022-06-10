@@ -53,10 +53,22 @@ function fruitProcessor(Oranges, lime) {
     console.log(Oranges, lime);// this will log the amount of oranges and limes inputted to the function.
     const orangePieces = cutFruit(Oranges);
     const LimePieces = cutFruit(lime);
-
-
     const Juice = `Here is a juice with ${orangePieces} oranges pieces and ${LimePieces} lime pieces`;
     return Juice;
 }
 
 console.log(fruitProcessor(6, 4));
+
+//coding challenge 1
+const calcAverage = (a, b, c) => (a + b + c) / 3;
+const scoreDolphins = calcAverage(44, 23, 71);
+const scoreKoalas = calcAverage(65, 54, 49);
+const checkWinner = function (avgDolphins, avgKoalas) {
+    if (avgDolphins >= 2 * avgKoalas) {
+        console.log("Dolphins WIN!")
+    } else if (avgKoalas >= 2 * avgDolphins) {
+        console.log("Koalas WIN!");
+    } else {
+        console.log("No team wins");
+    }
+}
