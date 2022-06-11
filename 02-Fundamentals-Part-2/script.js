@@ -81,3 +81,22 @@ console.log(years[2])
 const ageCalc = (calcAge2(years[2]));
 console.log(ageCalc);
 console.log(years.length)
+
+//basic array operations
+//adding elements
+const friendsArray = ['Bilal', 'Bob', 'Mike'];
+const newLength = friendsArray.push('John'); // this will add "john" to the end of the array!
+console.log(friendsArray); // this will log "friendsArray" to the console.
+console.log(newLength);
+friendsArray.unshift('Sam');// the "unshift" will help add "sam" to the start of the array.
+console.log(friendsArray);
+
+//removing elements
+friendsArray.pop();// removes the last element in the array
+friendsArray.shift(); // removes the first element in the array
+
+//finding the index of an element
+console.log(friendsArray.indexOf('John')); // will get the index of "John" from the "friendsArray".
+
+// checks for whether the string includes value. (boolean)
+console.log(friendsArray.includes(20)); // will return false as there is no 20 in "friendsArray".
