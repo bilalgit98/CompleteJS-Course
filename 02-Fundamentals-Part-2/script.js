@@ -72,3 +72,12 @@ const checkWinner = function (avgDolphins, avgKoalas) {
         console.log("No team wins");
     }
 }
+
+//Arrays
+const friend = ['Bilal', 'Bob', 'John'];
+console.log(friend[0]);
+const years = [2001, 2004, 1998, 1979];
+console.log(years[2])
+const ageCalc = (calcAge2(years[2]));
+console.log(ageCalc);
+console.log(years.length)
