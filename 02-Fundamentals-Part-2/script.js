@@ -100,3 +100,24 @@ console.log(friendsArray.indexOf('John')); // will get the index of "John" from 
 
 // checks for whether the string includes value. (boolean)
 console.log(friendsArray.includes(20)); // will return false as there is no 20 in "friendsArray".
+
+//objects
+const bilal = {
+    firstName: "Bilal",
+    age: 20,
+    job: "Student",
+}
+
+console.log(bilal.firstName); // we will get firstName in the console from the bilal object.
+
+const interests = prompt("What are you interested in? firstName? , age? , job?");
+
+if (bilal[interests]) {
+    console.log(bilal[interests]);
+} else {
+    console.log("Wrong!! Please select firstName? , age? , job?");
+}
+//dot and bracket notation
+bilal.location = "UK";
+bilal["Hobbies"] = "Programming";
+console.log(bilal);
