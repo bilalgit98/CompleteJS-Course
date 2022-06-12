@@ -102,6 +102,7 @@ console.log(friendsArray.indexOf('John')); // will get the index of "John" from 
 console.log(friendsArray.includes(20)); // will return false as there is no 20 in "friendsArray".
 
 //objects
+/*
 const bilal = {
     firstName: "Bilal",
     age: 20,
@@ -121,3 +122,26 @@ if (bilal[interests]) {
 bilal.location = "UK";
 bilal["Hobbies"] = "Programming";
 console.log(bilal);
+*/
+
+//object methods
+const bilal = {
+    firstName: "Bilal",
+    age: 20,
+    yearBorn: 2002,
+    job: "Student",
+    hasDriversLicence: true,
+
+    calcAge: function () {
+        console.log(this); // "this" is the object "bilal", logged to console for example purpose.
+        this.currentAge = 2047 - this.yearBorn;//  this.yearBorn is a valuve taken from the bilal object
+        return this.currentAge;
+    },
+    getSummary: function () {
+        return `${this.firstName} age is ${this.calcAge()} and has  ${this.hasDriversLicence ? 'a' : 'no'} driving licence.`
+    }
+};
+console.log(bilal.calcAge()); // will run the fucntion (calcAge) from the object bilal
+
+//challenge
+console.log(bilal.getSummary());
