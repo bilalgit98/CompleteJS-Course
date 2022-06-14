@@ -175,3 +175,9 @@ if (mark.bmi > john.bmi) {
 } else if (john.bmi > mark.bmi) {
     console.log(`${john.fullName} BMI (${john.bmi}) is higher than ${mark.fullName} BMI (${mark.bmi})`)
 };
+
+//loops
+//for loop
+for (let repetition = 1; repetition <= 10; repetition++) {//for loop with a counter AND KEEPS RUNNING WHEN TRUE
+    console.log(`Repetition counter ${repetition}`);
+} 
