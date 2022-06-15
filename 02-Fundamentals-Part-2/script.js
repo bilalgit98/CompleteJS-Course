@@ -177,7 +177,40 @@ if (mark.bmi > john.bmi) {
 };
 
 //loops
-//for loop
+//for loops
 for (let repetition = 1; repetition <= 10; repetition++) {//for loop with a counter AND KEEPS RUNNING WHEN TRUE
     console.log(`Repetition counter ${repetition}`);
-} 
+}
+
+const bilalArray = [ //bilalArray 
+    "Bilal",
+    2022 - 2002,
+    "Student Learning to code"
+];
+
+/*const types = []; //this is the types array which will have all the types from the "bilalArray"
+for (let i = 0; i < bilalArray.length; i++) {
+    console.log(bilalArray[i], typeof bilalArray[i]);
+    types[i] = typeof bilalArray[i]; // this will add types of bilalArray to the new Types Array
+}
+console.log(types); //this will log the types array to the console (typeof bilalArray)
+*/
+
+const agesArray = [];// blank agesArray
+const yearsArray = [1991, 2002, 1986, 1993];
+for (let i = 0; i < yearsArray.length; i++) {
+    agesArray.push(2022 - yearsArray[i]); // This will add "2022 - yearsArray[position]" to agesArray
+}
+console.log(agesArray);
+
+//Continue and Break
+const types = []; //this is the types array which will have all the types from the "bilalArray"
+for (let i = 0; i < bilalArray.length; i++) {
+    if (typeof bilalArray[i] !== "string") continue;
+    console.log(bilalArray[i], typeof bilalArray[i]);
+}
+//break
+for (let i = 0; i < bilalArray.length; i++) {
+    if (typeof bilalArray[i] === "number") break;
+    console.log(bilalArray[i], typeof bilalArray[i]);
+}
