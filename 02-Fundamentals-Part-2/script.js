@@ -233,3 +233,19 @@ for (let exercise = 1; exercise < 4; exercise++) {
         console.log(` exercise ${exercise}: lifting weigtht ${rep}`);
     }
 }
+
+//while loop
+let rep = 1;
+while (rep <= 10) {//in a while loop we will ONLY SPECIFY THE CONDITION, 
+    console.log(`WHILE: lifting weigtht ${rep}`);//and will run when condition is true.
+    rep++;
+};
+
+let dice = Math.trunc(Math.random() * 6) + 1;// generates a random number
+while (dice !== 6) { // loop will run if "dice" is not 6
+    console.log(`you rolled ${dice}`); // the number "dice" is logged to the console.
+    dice = Math.trunc(Math.random() * 6) + 1; // 
+    if (dice === 6) {
+        console.log("loop is about to end");
+    };
+}
