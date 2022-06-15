@@ -181,13 +181,13 @@ if (mark.bmi > john.bmi) {
 for (let repetition = 1; repetition <= 10; repetition++) {//for loop with a counter AND KEEPS RUNNING WHEN TRUE
     console.log(`Repetition counter ${repetition}`);
 }
-
+/*
 const bilalArray = [ //bilalArray 
     "Bilal",
     2022 - 2002,
     "Student Learning to code"
 ];
-
+*/
 /*const types = []; //this is the types array which will have all the types from the "bilalArray"
 for (let i = 0; i < bilalArray.length; i++) {
     console.log(bilalArray[i], typeof bilalArray[i]);
@@ -204,7 +204,7 @@ for (let i = 0; i < yearsArray.length; i++) {
 console.log(agesArray);
 
 //Continue and Break
-const types = []; //this is the types array which will have all the types from the "bilalArray"
+/* const types = []; //this is the types array which will have all the types from the "bilalArray"
 for (let i = 0; i < bilalArray.length; i++) {
     if (typeof bilalArray[i] !== "string") continue;
     console.log(bilalArray[i], typeof bilalArray[i]);
@@ -213,4 +213,23 @@ for (let i = 0; i < bilalArray.length; i++) {
 for (let i = 0; i < bilalArray.length; i++) {
     if (typeof bilalArray[i] === "number") break;
     console.log(bilalArray[i], typeof bilalArray[i]);
+}
+*/
+//looping backwards and loops in loops
+const bilalArray = [ //bilalArray 
+    "Bilal",
+    2022 - 2002,
+    "Student Learning to code"
+];
+
+for (let i = bilalArray.length - 1; i >= 0; i--) {
+    console.log(i, bilalArray[i]);
+}
+//loops within loops
+for (let exercise = 1; exercise < 4; exercise++) {
+    console.log(`Starting exercise ${exercise}`);
+
+    for (let rep = 1; rep < 4; rep++) {
+        console.log(` exercise ${exercise}: lifting weigtht ${rep}`);
+    }
 }
