@@ -14,21 +14,24 @@ document.querySelector('.check').addEventListener // This function will check if
     ('click', function () {
         const guess = Number(document.querySelector('.guess').value);
         console.log(typeof guess, guess);
-
-        if (!guess) {
+        if (!guess) { //When there is no input
             document.querySelector(".message").textContent = "No Number";
+        //When the number is correct
         } else if (guess === secretNumber) { // checks to see if our guess is = to the secret number.
             document.querySelector(".message").textContent = "correct";
+            document.querySelector('body').style.backgroundColor = '#60b347';
+
+        //When the guess is greater than secretNumber
         } else if (guess > secretNumber) {  // checks if our guess is greater than the secret number.
              if(score > 1){
                 document.querySelector(".message").textContent = "Too High";
                 score--; // If the condition is true (OUR guess value is greater than secret number) then the score will reduce by 1
-                 document.querySelector(".score").textContent = score;
+                document.querySelector(".score").textContent = score;
              } else {
                 document.querySelector(".message").textContent = "You Lost";
                 document.querySelector(".score").textContent = 0;
              }
-            
+        //When the guess is less than secretNumber
         } else if (guess < secretNumber) {// checks if our guess is less than the secret number.
             if(score > 1){
             document.querySelector(".message").textContent = "Too Low";
