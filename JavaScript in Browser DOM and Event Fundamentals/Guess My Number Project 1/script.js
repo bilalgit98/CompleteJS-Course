@@ -6,40 +6,53 @@ document.querySelector('.number').textContent = 13;
 document.querySelector('.score').textContent = 20
 document.querySelector('.guess').value = 19;
 */
-
-const secretNumber = Math.trunc(Math.random() * 20) + 1;//math.random (random number between 0 and 1)
+let secretNumber = Math.trunc(Math.random() * 20) + 1; //will generate a number between 0 and 20 
 let score = 20;
-//handling click events
-document.querySelector('.check').addEventListener // This function will check if our guess is high,low or Correct
-    ('click', function () {
-        const guess = Number(document.querySelector('.guess').value);
-        console.log(typeof guess, guess);
-        if (!guess) { //When there is no input
-            document.querySelector(".message").textContent = "No Number";
-        //When the number is correct
-        } else if (guess === secretNumber) { // checks to see if our guess is = to the secret number.
-            document.querySelector(".message").textContent = "correct";
-            document.querySelector('body').style.backgroundColor = '#60b347';
+let highScore = 0;
 
-        //When the guess is greater than secretNumber
-        } else if (guess > secretNumber) {  // checks if our guess is greater than the secret number.
-             if(score > 1){
-                document.querySelector(".message").textContent = "Too High";
-                score--; // If the condition is true (OUR guess value is greater than secret number) then the score will reduce by 1
-                document.querySelector(".score").textContent = score;
-             } else {
-                document.querySelector(".message").textContent = "You Lost";
-                document.querySelector(".score").textContent = 0;
-             }
-        //When the guess is less than secretNumber
-        } else if (guess < secretNumber) {// checks if our guess is less than the secret number.
-            if(score > 1){
-            document.querySelector(".message").textContent = "Too Low";
-            score--; // If the condition is true (OUR guess value is less than secret number) then the score will reduce by 1
-            document.querySelector(".score").textContent = score;
-            } else {
-                document.querySelector(".message").textContent = "You Lost";
-                document.querySelector(".score").textContent = 0;
-            }
+document.querySelector('.check').addEventListener('click',function (){
+    const ourGuess = Number(document.querySelector('.guess').value);// Guess value inputted by user
 
-        }});
+    if (!ourGuess) { //Checks to see if the Guess value is a Number (Boolean)
+        document.querySelector('.message').textContent = 'No Number!!'; // If true prints the following
+    } else if (ourGuess === secretNumber ) {
+        document.querySelector('.message').textContent = 'Your guess is correct!';
+        document.querySelector('body').style.backgroundColor = '#60b347';
+
+        if (score > highScore ){
+            highScore  = score;
+            document.querySelector('.highscore').textContent = highScore;
+        }
+
+    } else if (ourGuess > secretNumber ) {
+        if(score>0){
+           document.querySelector('.message').textContent = 'Your guess is too high';
+           score--;
+           document.querySelector('.score').textContent = score;
+        } else {
+           document.querySelector('.message').textContent = 'You Lose !!';
+           document.querySelector('.score').textContent = 0;
+
+        }
+
+    } else if (ourGuess < secretNumber){
+
+        if(score>0){
+            document.querySelector('.message').textContent = 'Your guess is too low';    
+            score--;
+            document.querySelector('.score').textContent = score;
+         } else {
+            document.querySelector('.message').textContent = 'You Lose !!';
+            document.querySelector('.score').textContent = 0;
+         }
+    }
+});
+
+document.querySelector('.again').addEventListener ('click', function(){
+    score = 20;
+    secretNumber = Math.trunc(Math.random() * 20) + 1; //will generate a number between 0 and 20
+    document.querySelector('.message').textContent = 'Start Guessing...';
+    document.querySelector('.score').textContent = score;
+    document.querySelector('body').style.backgroundColor = '#222';
+    document.querySelector('.guess').value = '';
+});
