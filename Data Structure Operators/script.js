@@ -16,6 +16,10 @@ const restaurant = {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
 
+  orderDelivery: function (object) {
+    console.log(object);
+  },
+
   openingHours: {
     thu: {
       open: 12,
@@ -32,11 +36,12 @@ const restaurant = {
   },
 };
 
+/*
 //destructring arrays
 const arr = [6, 7, 8];
 const [a, b, c] = arr;
 console.log(a, b, c); // 6,7,8
-
+*/
 //destructing arrays with the examples
 let [first, second] = restaurant.starterMenu;
 console.log(first, second); // Focaccia and Bruschetta
@@ -47,3 +52,27 @@ console.log(first, second);
 
 const [starters, mainCourse] = restaurant.order(1, 2);
 console.log(starters, mainCourse);
+
+// Destructuring objects
+const { name, openingHours } = restaurant;
+console.log(name, openingHours);
+
+const { name: restaurantName, openingHours: currentHours } = restaurant;
+console.log(restaurantName, currentHours);
+
+//Default values
+const { menu = [], starterMenu: start = [] } = restaurant;
+console.log(menu, start);
+
+//mutating variables
+let z = 2;
+let y = 6;
+const rndObj = { z: 20, y: 90, c: 100 };
+({ z, y } = rndObj);
+console.log(z, y);
+
+//Default Values
+const {
+  fri: { open: op, close: cl },
+} = openingHours;
+console.log(op, cl);
