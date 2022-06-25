@@ -20,6 +20,10 @@ const restaurant = {
     console.log(object);
   },
 
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(`Your pasta with ${ing1}, ${ing2} and ${ing3} is ready!!`);
+  },
+
   openingHours: {
     thu: {
       open: 12,
@@ -41,7 +45,7 @@ const restaurant = {
 const arr = [6, 7, 8];
 const [a, b, c] = arr;
 console.log(a, b, c); // 6,7,8
-*/
+
 //destructing arrays with the examples
 let [first, second] = restaurant.starterMenu;
 console.log(first, second); // Focaccia and Bruschetta
@@ -76,3 +80,22 @@ const {
   fri: { open: op, close: cl },
 } = openingHours;
 console.log(op, cl);
+*/
+
+//the spread operator
+const arr = [9, 8, 2];
+
+const goodArray = [1, 2, 3, 4, ...arr];
+console.log(goodArray); // will log 1,2,3,4,9,8,2
+
+//copy array
+const copyMenu = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(...copyMenu);
+
+//from the function orderPasta
+const ingredients = [
+  prompt('What is ingredient 1?'),
+  prompt('What is ingredient 2?'),
+  prompt('What is ingredient 3?'),
+];
+restaurant.orderPasta(...ingredients);
