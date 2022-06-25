@@ -80,7 +80,7 @@ const {
   fri: { open: op, close: cl },
 } = openingHours;
 console.log(op, cl);
-*/
+
 
 //the spread operator
 const arr = [9, 8, 2];
@@ -99,3 +99,14 @@ const ingredients = [
   prompt('What is ingredient 3?'),
 ];
 restaurant.orderPasta(...ingredients);
+*/
+//rest pattern and parameters
+const [pizza, , rissoto, ...foods] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(pizza, rissoto, foods);
+
+//rest pattern with objects
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(weekend);
