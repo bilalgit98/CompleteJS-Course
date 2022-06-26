@@ -109,4 +109,23 @@ console.log(pizza, rissoto, foods);
 
 //rest pattern with objects
 const { sat, ...weekdays } = restaurant.openingHours;
-console.log(weekend);
+console.log(weekdays);
+
+//Logical Assignment Operators
+const resturant1 = {
+  name: 'rest1',
+  numGuest: 30,
+};
+
+const resturant2 = {
+  name: 'rest2',
+  owner: 'John',
+};
+
+//resturant2.numGuest = resturant1.numGuest || 10; // if restresturant1.numGuest is defiened then it will be true, therfore resturant2.numGuest = 30
+//console.log(resturant2.numGuest);// 30 because resturant1.numGuest is true and set as 30
+
+resturant1.numGuest ||= 10; // should return 30
+resturant2.numGuest ||= 10; // should return 10
+console.log(resturant1.numGuest); // should return 30
+console.log(resturant2.numGuest); // should return 10
