@@ -23,23 +23,21 @@ const restaurant = {
   orderPasta: function (ing1, ing2, ing3) {
     console.log(`Your pasta with ${ing1}, ${ing2} and ${ing3} is ready!!`);
   },
-
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
+};
+const openingHours = {
+  thu: {
+    open: 12,
+    close: 22,
+  },
+  fri: {
+    open: 11,
+    close: 23,
+  },
+  sat: {
+    open: 0, // Open 24 hours
+    close: 24,
   },
 };
-
 /*
 //destructring arrays
 const arr = [6, 7, 8];
@@ -99,7 +97,7 @@ const ingredients = [
   prompt('What is ingredient 3?'),
 ];
 restaurant.orderPasta(...ingredients);
-*/
+
 //rest pattern and parameters
 const [pizza, , rissoto, ...foods] = [
   ...restaurant.mainMenu,
@@ -110,7 +108,7 @@ console.log(pizza, rissoto, foods);
 //rest pattern with objects
 const { sat, ...weekdays } = restaurant.openingHours;
 console.log(weekdays);
-
+*/
 //Logical Assignment Operators
 const resturant1 = {
   name: 'rest1',
@@ -129,3 +127,110 @@ resturant1.numGuest ||= 10; // should return 30
 resturant2.numGuest ||= 10; // should return 10
 console.log(resturant1.numGuest); // should return 30
 console.log(resturant2.numGuest); // should return 10
+
+const menu = [...restaurant.mainMenu, ...restaurant.starterMenu];
+for (const things of menu) {
+  console.log(things);
+}
+
+for (const things of menu.entries()) {
+  console.log(things);
+}
+
+//optional chaining
+//console.log(restaurant.openingHours.mon?.open); // mon is undefined but by using optional chaining when trying to read open we get "undefined"
+const day = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+//looping objects
+//PROPERTY NAMES
+const properties = Object.keys(openingHours);
+console.log(properties);
+
+let openStr = `we are open on ${properties.length} days `;
+
+for (const a of properties) {
+  console.log(a);
+  openStr += `${a},`;
+}
+console.log(openStr);
+
+//PROPERTY VALUES
+const values = Object.values(openingHours);
+console.log(values);
+//ENTRIES OBJECT
+const entries = Object.entries(openingHours);
+console.log(entries);
+
+for (const [key, { open, close }] of entries) {
+  console.log(`on ${key} we open at ${open} and close at ${close}.`);
+}
+
+//sets
+const ordersSet = new Set([
+  'pasta',
+  'pizza',
+  'pizza',
+  'risotto',
+  'pasta',
+  'pizza',
+]);
+console.log(ordersSet); //duplicates are removed
+
+console.log(ordersSet.size); // just like length will start from 1
+
+console.log(ordersSet.has('garlic')); // boolean (true or false)
+ordersSet.add('bread');
+ordersSet.delete('pizza');
+console.log(ordersSet);
+//example
+const staff = ['manager', 'manager', 'waiter', 'chef', 'waiter', 'chef'];
+const staffUnique = new Set(staff);
+console.log(staffUnique);
+
+//maps data structure
+const rest = new Map();
+rest.set('name', 'Classico Italiano');
+rest.set(1, 'italy');
+rest.set(2, 'portugal');
+console.log(rest);
+rest
+  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'we are open')
+  .set(false, 'we are closed');
+console.log(rest.get('name')); //Classico Italiano
+console.log(rest.get(1)); //Italy
+
+const currentTime = 20;
+const checkOpen = rest.get(
+  currentTime > rest.get('open') && currentTime < rest.get('close')
+); // will return a true or false value, which will be compared with the rest map
+console.log(checkOpen);
+
+console.log(rest.has('categories')); //checks if its true or false
+rest.delete(2); //will delete (2)
+console.log(rest);
+const question = new Map([
+  ['question', 'what is the best programming language?'],
+  [1, 'js'],
+  [2, 'c'],
+  [3, 'python'],
+  ['correct', 1],
+  [true, 'correct!!'],
+  [false, 'Try again'],
+]);
+console.log(question);
+
+//convert object to maps
+console.log(Object.entries(openingHours));
+const hoursMap = new Map(Object.entries(openingHours));
+console.log(hoursMap);
+
+//iteration on maps
+console.log(question.get('question'));
+for (const [key, value] of question) {
+  if (typeof key === 'number') console.log(`answer ${key}: ${value}`);
+}
+
+const answer = Number(prompt(''));
