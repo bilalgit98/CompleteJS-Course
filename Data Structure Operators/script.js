@@ -108,7 +108,7 @@ console.log(pizza, rissoto, foods);
 //rest pattern with objects
 const { sat, ...weekdays } = restaurant.openingHours;
 console.log(weekdays);
-*/
+
 //Logical Assignment Operators
 const resturant1 = {
   name: 'rest1',
@@ -233,4 +233,59 @@ for (const [key, value] of question) {
   if (typeof key === 'number') console.log(`answer ${key}: ${value}`);
 }
 
-const answer = Number(prompt(''));
+const answer = Number(prompt('What is your answer??'));
+console.log(answer);
+
+console.log(question.get(question.get('correct') === answer));
+
+//convert maps to arrays
+console.log([...question]);
+*/
+
+//working with strings
+const airline = 'Air UK';
+const plane = 'A320';
+
+console.log(plane[0]); // this will log the first letter "a"
+console.log('B737'[1]); //This will log "7" to the console.
+
+console.log(airline.indexOf('i')); // this will log "1" because "i" is at index 1
+// console.log(airline .lastIndexOf()) this will give us the last occurence
+
+console.log(airline.slice(4));
+console.log(airline.slice(4, 6)); // will log "UK"
+console.log(airline.slice(-1)); // will log "K"
+
+//challenge for checking middle seat
+const checkMiddleSeat = function (seat) {
+  const seatLetter = seat.slice(-1);
+  if (seatLetter === 'B' || seatLetter === 'E') {
+    // Seats "E" and 'B' are middle seats
+    console.log('YOU HAVE GOT A MIDDLE SEAT');
+  } else {
+    console.log('YOU DO NOT HAVE A MIDDLE SEAT!!');
+  }
+};
+
+checkMiddleSeat('10B');
+checkMiddleSeat('11E');
+checkMiddleSeat('9C');
+
+//replacing
+const priceGbp = '£250,99';
+const priceUsd = priceGbp.replace('£', '$').replace(',', '.');
+console.log('priceGbp', priceGbp, ',priceUsd', priceUsd);
+
+//booleans
+const newPlane = 'A320neo';
+console.log(newPlane.includes('A320'));
+console.log(newPlane.startsWith('A')); // case sensitive
+
+//"split" strings
+console.log('a+string'.split('+'));
+console.log('this+is+how+split+works'.split('+'));
+
+//padding a string
+const message = 'go to 23';
+console.log(message.padStart(20, ' ')); // "message" has been padded with a space and now has 20 in length.
+//padEnd is used to pad at the end, and will add on to the current length to reach a number.
