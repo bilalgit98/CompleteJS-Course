@@ -31,3 +31,21 @@ const checkIn = function (flightNumber, passengerObj) {
 };
 
 console.log(checkIn(flight, bilal)); // the values that we are passing in are "flight" variable and the "bilal" Object!
+
+//Functions Accepting Callback Functions
+const oneWord = function (str) {
+  return str.replace(/ /g, '').toLowerCase();
+};
+
+const upperWord = function (str) {
+  const [first, ...others] = str.split(' ');
+  return [first.toUpperCase(), ...others].join(' ');
+};
+
+//Higher order function
+const transform = function (str, fn) {
+  console.log(`Here is the original string -- ${str} `);
+  console.log(`here is the transformed string -- ${fn(str)}`);
+};
+
+transform('javascript is amazing', upperWord);
