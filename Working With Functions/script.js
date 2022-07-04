@@ -49,3 +49,13 @@ const transform = function (str, fn) {
 };
 
 transform('javascript is amazing', upperWord);
+
+//functions returning other functions
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting} ${name}`);
+  };
+};
+
+const greetings = greet('Hello');
+greetings('John');
