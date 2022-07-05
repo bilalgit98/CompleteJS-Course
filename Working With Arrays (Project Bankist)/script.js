@@ -61,6 +61,27 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const printMovements = function (movements) {
+  containerMovements.innerHTML = ''; // will clear the container
+
+  movements.forEach(function (mov, i) {
+    const type = mov > 0 ? 'deposit' : 'withdrawal'; // checks whether the movement is a deposit or withdrawal
+
+    //template literal with html
+    const html = ` 
+    <div class="movements__row">
+          <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
+          <div class="movements__value">${mov}</div>
+        </div>
+    `;
+
+    containerMovements.insertAdjacentHTML('afterbegin', html); // gets html from the template literal
+  });
+};
+
+printMovements(account1.movements);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -72,7 +93,7 @@ const currencies = new Map([
 ]);
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
+/*
 for (const movement of movements) {
   if (movement > 0) {
     console.log(`You deposited ${movement}`);
@@ -91,3 +112,10 @@ movements.forEach(function (mov, arr) {
   }
 });
 /////////////////////////////////////////////////
+//forEach with maps and sets
+currencies.forEach(function (value, key, map) {
+  console.log(`${key} : ${value}`);
+});
+*/
+
+//creating DOM Elements
