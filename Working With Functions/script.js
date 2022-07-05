@@ -111,3 +111,9 @@ lufthansa.buyPlanes = function () {
 document
   .querySelector('.buy')
   .addEventListener('click', lufthansa.buyPlanes.bind(lufthansa)); //the bind method helps set the "this" keyword
+
+//Immediately Invoked Function Expressions (IIFE)
+//IIFE
+(function () {
+  console.log('IIFE example');
+})();
