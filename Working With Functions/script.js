@@ -1,4 +1,5 @@
 'use strict';
+/*
 //defalut parameters
 const bookings = [];
 const createBooking = function (flightNumb, numbPassengers = 1, price = 300) {
@@ -59,3 +60,54 @@ const greet = function (greeting) {
 
 const greetings = greet('Hello');
 greetings('John');
+*/
+
+//The call and apply methods
+const lufthansa = {
+  airline: 'Lufthansa',
+  iataCode: 'LH',
+  bookings: [],
+  book(flightNum, name) {
+    console.log(
+      `${name} has been booked on flight ${this.iataCode}${flightNum}  on ${this.airline}`
+    );
+    this.bookings.push({
+      flight: `${this.iataCode}${this.flightNum}, ${name}`,
+    });
+  },
+};
+
+lufthansa.book(330, 'John Smith');
+
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+};
+
+const book = lufthansa.book;
+//book(300, 'Laura Smith');this will not work
+
+book.call(eurowings, 453, 'James Rob');
+console.log(eurowings);
+
+//THE BIND METHOD
+const bookEurowings = book.bind(eurowings); // the bind method sets the "this" word so we dont have to do it all the time.
+const bookLufthansa = book.bind(lufthansa);
+bookEurowings(792, 'Steve Johnson');
+
+//preset a value in the bind method
+const bookEW99 = book.bind(eurowings, 99); // the flight numb has been set to 99
+bookEW99('Mark');
+
+//with event listeners
+lufthansa.planes = 300;
+lufthansa.buyPlanes = function () {
+  // buy plane function
+  console.log(this);
+  this.planes++; //increases by 1
+  console.log(this.planes);
+};
+document
+  .querySelector('.buy')
+  .addEventListener('click', lufthansa.buyPlanes.bind(lufthansa)); //the bind method helps set the "this" keyword
