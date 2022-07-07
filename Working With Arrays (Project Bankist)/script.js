@@ -82,7 +82,22 @@ const printMovements = function (movements) {
 };
 
 printMovements(account1.movements);
-/////////////////////////////////////////////////
+
+const createUsers = function (acounts) {
+  accounts.forEach(function (accs) {
+    accs.username = accs.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+    return accs.username;
+  });
+};
+
+createUsers(accounts);
+console.log(accounts);
+
+////////////////////////////////// ///////////////
 /////////////////////////////////////////////////
 // LECTURES
 
