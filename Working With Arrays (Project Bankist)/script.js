@@ -93,6 +93,29 @@ const currencies = new Map([
 ]);
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const eurUsd = 1.1; // this is converstion
+
+// with a function
+const mapMovUsd = movements.map(function (mov) {
+  // will return a new array (map) and doesnt mutate the movements array
+  return mov * eurUsd;
+});
+
+console.log(movements);
+console.log(mapMovUsd);
+
+//for of
+const movementsUsdFor = [];
+for (const mov of movements) movementsUsdFor.push(mov * eurUsd);
+
+console.log(movementsUsdFor);
+
+const movementsDesc = movements.map(
+  mov => `You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(mov)}`
+);
+
+console.log(movementsDesc);
 /*
 for (const movement of movements) {
   if (movement > 0) {
