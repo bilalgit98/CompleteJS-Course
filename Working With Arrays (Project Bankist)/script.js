@@ -104,6 +104,8 @@ const calcDispBalance = function (movements) {
 
 calcDispBalance(account1.movements);
 
+//
+
 ////////////////////////////////// ///////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -225,4 +227,11 @@ currencies.forEach(function (value, key, map) {
 });
 */
 
-//creating DOM Elements
+// the find method
+const firstWithdrwal = movements.find(mov => mov < 0); // will stop at the first "true" value
+console.log(movements);
+console.log(firstWithdrwal);
+console.log(accounts);
+
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);
