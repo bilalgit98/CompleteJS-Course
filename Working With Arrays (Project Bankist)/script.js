@@ -307,3 +307,19 @@ console.log(account);
 //when testing for a condition we use some
 const anyDepo = movements.some(mov => mov > 0); // some checks to see if there is values above 0 in the movements array.
 console.log(anyDepo);
+
+//every
+console.log(movements.every(mov => mov > 0)); // checks all
+
+//flat
+const overallBalance = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0); // total
+console.log(overallBalance);
+
+//flatmap
+const overallBalance2 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0); // total
+console.log(overallBalance2);
