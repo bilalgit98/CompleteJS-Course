@@ -97,15 +97,58 @@ const createUsers = function (acounts) {
 createUsers(accounts);
 console.log(accounts);
 
-const calcDispBalance = function (movements) {
-  const balance = movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = ` ${balance} EUR`;
+const updateUI = function (acc) {
+  printMovements(currentAccount.movements);
+  calcDispBalance(currentAccount);
+  calcDisplaySum(currentAccount);
 };
 
-calcDispBalance(account1.movements);
+const calcDispBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = ` ${acc.balance} EUR`;
+};
 
-//
+let currentAccount;
 
+//Event Handler
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault();
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+  console.log(currentAccount);
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    labelWelcome.textContent = ` Welcome Back ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    containerApp.style.opacity = 100;
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur();
+    updateUI(currentAccount);
+  }
+});
+
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const reciverAcc = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
+
+  inputTransferAmount.value = inputTransferTo.value = '';
+  if (
+    amount > 0 &&
+    reciverAcc &&
+    currentAccount.balance >= amount &&
+    reciverAcc?.username !== currentAccount.username
+  ) {
+    console.log('Transfer VALID');
+    currentAccount.movements.push(-amount);
+    reciverAcc.movements.push(amount);
+    updateUI(currentAccount);
+  }
+});
 ////////////////////////////////// ///////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -118,20 +161,20 @@ const currencies = new Map([
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-const calcDisplaySum = function (movment) {
-  const incomes = movements
+const calcDisplaySum = function (acc) {
+  const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
   labelSumIn.textContent = `${incomes} EUR`;
 
-  const out = movements
+  const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
   labelSumOut.textContent = `${Math.abs(out)} EUR`;
 
-  const interest = movements
+  const interest = acc.movements
     .filter(mov => mov > 0)
-    .map(deposits => (deposits * 1.2) / 100)
+    .map(deposits => (deposits * acc.interestRate) / 100)
     .filter((int, i, arr) => {
       console.log(arr);
       return int >= 1;
@@ -139,8 +182,6 @@ const calcDisplaySum = function (movment) {
     .reduce((acc, int) => acc + int, 0);
   labelSumInterest.textContent = `${interest}EUR`;
 };
-
-calcDisplaySum(account1.movements);
 
 // finding the max value
 const max = movements.reduce((acc, mov) => {
