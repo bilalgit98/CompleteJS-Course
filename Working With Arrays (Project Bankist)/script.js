@@ -131,6 +131,20 @@ const movementsDesc = movements.map(
 );
 
 console.log(movementsDesc);
+
+// the filter methods
+const deposits = movements.filter(function (mov) {
+  return mov > 0; // pass in a boolean value (numbers that are above 0 will make it to the deposits array)
+}); // create an array of deposits
+console.log(movements);
+console.log(deposits);
+
+const depositsOne = [];
+for (const mov of movements) if (mov > 0) depositsOne.push(mov);
+console.log(depositsOne);
+
+const withdrawals = movements.filter(mov => mov < 0);
+console.log(withdrawals);
 /*
 for (const movement of movements) {
   if (movement > 0) {
