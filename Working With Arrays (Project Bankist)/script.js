@@ -97,6 +97,13 @@ const createUsers = function (acounts) {
 createUsers(accounts);
 console.log(accounts);
 
+const calcDispBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = ` ${balance} EUR`;
+};
+
+calcDispBalance(account1.movements);
+
 ////////////////////////////////// ///////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -109,6 +116,36 @@ const currencies = new Map([
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
+const calcDisplaySum = function (movment) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes} EUR`;
+
+  const out = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${Math.abs(out)} EUR`;
+
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposits => (deposits * 1.2) / 100)
+    .filter((int, i, arr) => {
+      console.log(arr);
+      return int >= 1;
+    })
+    .reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${interest}EUR`;
+};
+
+calcDisplaySum(account1.movements);
+
+// finding the max value
+const max = movements.reduce((acc, mov) => {
+  if (acc > mov) return acc;
+  else return mov;
+}, movements[0]);
+console.log(max);
 const eurUsd = 1.1; // this is converstion
 
 // with a function
@@ -145,6 +182,24 @@ console.log(depositsOne);
 
 const withdrawals = movements.filter(mov => mov < 0);
 console.log(withdrawals);
+
+// the reduce method
+console.log(movements); // basic log of the movements array
+const balance = movements.reduce(function (acc, current, i, arr) {
+  return acc + current;
+}, 0); // "0" is the starting value
+
+console.log(balance); // total value
+
+//Chaining
+const eurToUsd = 1.1;
+const totalUsdDeposits = movements
+  .filter(mov => mov > 0)
+  .map((mov, i, arr) => {
+    return mov * eurToUsd;
+  })
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(totalUsdDeposits);
 /*
 for (const movement of movements) {
   if (movement > 0) {
