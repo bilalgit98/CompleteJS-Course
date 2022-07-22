@@ -45,3 +45,25 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
     document.querySelector(id).scrollIntoView({ behaviour: 'smooth' });
   }
 });
+
+//BUILDING A TABBED COMPONENT
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+tabsContainer.addEventListener('click', function (e) {
+  const clicked = e.target.closest('.operations__tab');
+
+  if (!clicked) return;
+
+  // removing classes
+  tabs.forEach(t => t.classList.remove('operations_tab--active'));
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+
+  // activate tab
+  clicked.classList.add('operations__tab--active');
+  // activate content area
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+});
