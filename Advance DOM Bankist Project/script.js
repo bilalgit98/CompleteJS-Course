@@ -69,8 +69,7 @@ tabsContainer.addEventListener('click', function (e) {
 });
 
 //Passing Arguments to Event Handler (nav bar menu fade)
-const nav = document.querySelector('.mav');
-
+const nav = document.querySelector('.nav');
 //menu fade
 const handleHover = function (e) {
   if (e.target.classList.contains('nav__link')) {
@@ -86,5 +85,24 @@ const handleHover = function (e) {
 };
 
 nav.addEventListener('mouseover', handleHover.bind(0.5));
+nav.addEventListener('mouseout', handleHover.bind(1));
 
-nav.addEventListener('mouseout', handleHover(1));
+//Implementing a sticky navigation
+
+const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
+
+const stickyNav = function (entries) {
+  const [entry] = entries;
+  console.log(entry);
+  if (!entry.Isintersecting) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+};
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `${navHeight}px`,
+});
+
+headerObserver.observe(header);
