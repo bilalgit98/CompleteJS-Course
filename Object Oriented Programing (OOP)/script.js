@@ -17,26 +17,26 @@ dave.calcAge();
 
 //coding challenge 1
 
-const car = function (make, speed) {
-  this.make = make;
-  this.speed = speed;
-};
+// const car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+// };
 
-car.prototype.accelarate = function () {
-  this.speed += 10;
-  console.log(`${this.make} is going at ${this.speed}`);
-};
+// car.prototype.accelarate = function () {
+//   this.speed += 10;
+//   console.log(`${this.make} is going at ${this.speed}`);
+// };
 
-car.prototype.brake = function () {
-  this.speed -= 5;
-  console.log(`${this.make} is going at ${this.speed}`);
-};
+// car.prototype.brake = function () {
+//   this.speed -= 5;
+//   console.log(`${this.make} is going at ${this.speed}`);
+// };
 
-const bmw = new car('Bmw', 120);
-const mercedes = new car('Mercedes', 95);
+// const bmw = new car('Bmw', 120);
+// const mercedes = new car('Mercedes', 95);
 
-bmw.accelarate();
-bmw.brake();
+// bmw.accelarate();
+// bmw.brake();
 
 //setters and getters
 
@@ -57,3 +57,33 @@ const account = {
 console.log(account.latest);
 account.latest = 50;
 console.log(account.movements);
+
+//coding challenge 2
+class CarCalc {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelarate = function () {
+    this.speed += 10;
+    console.log(`${this.make} is going at ${this.speed}`);
+  };
+
+  brake = function () {
+    this.speed -= 5;
+    console.log(`${this.make} is going at ${this.speed}`);
+  };
+
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
+  }
+}
+const ford = new CarCalc('FORD', 120);
+console.log(ford.speedUS);
+ford.speedUS = 60;
+console.log(ford);
