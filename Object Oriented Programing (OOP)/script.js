@@ -37,3 +37,23 @@ const mercedes = new car('Mercedes', 95);
 
 bmw.accelarate();
 bmw.brake();
+
+//setters and getters
+
+const account = {
+  owner: 'bilal',
+  movements: [200, 900, 600, 300],
+
+  get latest() {
+    //getter
+    return this.movements.slice(-1).pop();
+  },
+  //set
+  set latest(mov) {
+    this.movements.push(mov);
+  },
+};
+
+console.log(account.latest);
+account.latest = 50;
+console.log(account.movements);
