@@ -1,19 +1,19 @@
 'use strict';
-const Person = function (firstName, birthYear) {
-  this.firstName = firstName;
-  this.birthYear = birthYear;
-};
+// const Person = function (firstName, birthYear) {
+//   this.firstName = firstName;
+//   this.birthYear = birthYear;
+// };
 
-const dave = new Person('Dave', 2001);
+// const dave = new Person('Dave', 2001);
 
-console.log(dave);
+// console.log(dave);
 
-//Prototype
-Person.prototype.calcAge = function () {
-  console.log(2022 - this.birthYear);
-};
+// //Prototype
+// Person.prototype.calcAge = function () {
+//   console.log(2022 - this.birthYear);
+// };
 
-dave.calcAge();
+// dave.calcAge();
 
 //coding challenge 1
 
@@ -87,3 +87,38 @@ const ford = new CarCalc('FORD', 120);
 console.log(ford.speedUS);
 ford.speedUS = 60;
 console.log(ford);
+
+//inheritence
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+
+const dave = new Person('Dave', 2001);
+
+console.log(dave);
+
+//Prototype
+Person.prototype.calcAge = function () {
+  console.log(2022 - this.birthYear);
+};
+
+dave.calcAge();
+
+const Student = function (firstName, birthYear, course) {
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+Student.prototype = Object.create(Person.prototype);
+
+Student.prototype.introduce = function () {
+  console.log(
+    `My name is ${this.firstName}, and i am studying ${this.course}!`
+  );
+};
+
+const john = new Student('john', 2000, 'Comp Sci');
+console.log(john);
+john.introduce();
+john.calcAge();
