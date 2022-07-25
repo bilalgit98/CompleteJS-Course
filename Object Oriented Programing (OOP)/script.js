@@ -124,44 +124,100 @@ console.log(account.movements);
 // john.calcAge();
 
 //coding challenge 3
-const Car = function (make, speed) {
-  this.make = make;
-  this.speed = speed;
-};
+// const Car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+// };
 
-Car.prototype.accelarate = function () {
-  this.speed += 10;
-  console.log(`${this.make} is going at ${this.speed}`);
-};
+// Car.prototype.accelarate = function () {
+//   this.speed += 10;
+//   console.log(`${this.make} is going at ${this.speed}`);
+// };
 
-Car.prototype.brake = function () {
-  this.speed -= 5;
-  console.log(`${this.make} is going at ${this.speed}`);
-};
+// Car.prototype.brake = function () {
+//   this.speed -= 5;
+//   console.log(`${this.make} is going at ${this.speed}`);
+// };
 
-const EV = function (make, speed, charge) {
-  Car.call(this, make, speed);
-  this.charge = charge;
-};
-// creating the link between the prototypes
-EV.prototype = Object.create(Car.prototype);
+// const EV = function (make, speed, charge) {
+//   Car.call(this, make, speed);
+//   this.charge = charge;
+// };
+// // creating the link between the prototypes
+// EV.prototype = Object.create(Car.prototype);
 
-//Battery charge
-EV.prototype.chargeBattery = function (chargeTo) {
-  this.charge = chargeTo;
-};
-//Accelerate
-EV.prototype.accelarate = function () {
-  this.speed += 20;
-  this.charge--;
-  console.log(
-    `${this.make} is going at ${this.speed} and the battery charge is at ${this.charge}`
-  );
-};
+// //Battery charge
+// EV.prototype.chargeBattery = function (chargeTo) {
+//   this.charge = chargeTo;
+// };
+// //Accelerate
+// EV.prototype.accelarate = function () {
+//   this.speed += 20;
+//   this.charge--;
+//   console.log(
+//     `${this.make} is going at ${this.speed} and the battery charge is at ${this.charge}`
+//   );
+// };
 
-//Creating the EV
-const tesla = new EV('Tesla', 120, 23);
-tesla.chargeBattery(98); //battery charge should be set to 98
-console.log(tesla);
-tesla.brake();
-tesla.accelarate(); //battery percentage/charge drops by 1
+// //Creating the EV
+// const tesla = new EV('Tesla', 120, 23);
+// tesla.chargeBattery(98); //battery charge should be set to 98
+// console.log(tesla);
+// tesla.brake();
+// tesla.accelarate(); //battery percentage/charge drops by 1
+
+//coding challenge 4
+
+class CarCalc {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelarate() {
+    this.speed += 10;
+    console.log(`${this.make} is going at ${this.speed}`);
+  }
+
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.make} is going at ${this.speed}`);
+    return this;
+  }
+
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
+  }
+}
+
+class EvCalc extends CarCalc {
+  #charge;
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
+  //Battery charge
+  chargeBattery(chargeTo) {
+    this.#charge = chargeTo;
+    return this;
+  }
+  //Accelerate
+  accelarate() {
+    this.speed += 20;
+    this.#charge--;
+    console.log(
+      `${this.make} is going at ${this.speed} and the battery charge is at ${
+        this.#charge
+      }`
+    );
+    return this;
+  }
+}
+
+const rivian = new EvCalc('Rivian', 120, 23);
+console.log(rivian);
+rivian.accelarate().brake().chargeBattery(20).accelarate();
