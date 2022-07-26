@@ -106,7 +106,7 @@ class App {
     this.#map.on('click', this._showForm.bind(this));
 
     this.#workouts.forEach(work => {
-      this._renderWorkout(work);
+      this._renderWorkoutMarker(work);
     });
   }
 
@@ -305,11 +305,9 @@ class App {
     console.log(data);
     if (!data) return;
     this.#workouts = data;
-  }
-
-  _reset() {
-    localStorage.removeItem('workouts');
-    location.reload();
+    this.#workouts.forEach(work => {
+      this._renderWorkout(work);
+    });
   }
 }
 
