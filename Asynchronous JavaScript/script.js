@@ -175,32 +175,44 @@ const getJSON = function (url, errorMsg = 'Something went wrong!') {
 
 //coding challenge 1
 
-const whereAmI = function (lat, lng) {
-  fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
-    .then(response => {
-      console.log(response);
-      if (!response.ok)
-        throw new Error(`There is a problem with geocoding ${response.status}`);
-      return response.json();
-    })
-    .then(data => {
-      console.log(data);
-      console.log(
-        `The Country that you are currently in ${data.city} , ${data.country}`
-      );
+// const whereAmI = function (lat, lng) {
+//   fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
+//     .then(response => {
+//       console.log(response);
+//       if (!response.ok)
+//         throw new Error(`There is a problem with geocoding ${response.status}`);
+//       return response.json();
+//     })
+//     .then(data => {
+//       console.log(data);
+//       console.log(
+//         `The Country that you are currently in ${data.city} , ${data.country}`
+//       );
 
-      return fetch(`https://restcountries.com/v2/name/${data.country}`);
-    })
-    .then(response => {
-      if (!response.ok)
-        throw new Error(`Country not found (${response.status})`);
-      return response.json();
-    })
+//       return fetch(`https://restcountries.com/v2/name/${data.country}`);
+//     })
+//     .then(response => {
+//       if (!response.ok)
+//         throw new Error(`Country not found (${response.status})`);
+//       return response.json();
+//     })
 
-    .then(data => renderCountry(data[0]))
-    .catch(err => console.error(`${err.message}💥`));
-};
+//     .then(data => renderCountry(data[0]))
+//     .catch(err => console.error(`${err.message}💥`));
+// };
 
-whereAmI(52.508, 13.381);
-whereAmI(19.037, 72.873);
-whereAmI(-33.933, 18.474);
+// whereAmI(52.508, 13.381);
+// whereAmI(19.037, 72.873);
+// whereAmI(-33.933, 18.474);
+
+//the event loop in practise
+console.log('Test Start');
+setTimeout(() => console.log('0 sec timer'), 0);
+
+Promise.resolve('Resolved Promise 1').then(response => console.log(response));
+Promise.resolve('Resolve Promise 2').then(response => {
+  for (let i = 0; i < 100; i++) {}
+  console.log(response);
+});
+
+console.log('TEST END');
