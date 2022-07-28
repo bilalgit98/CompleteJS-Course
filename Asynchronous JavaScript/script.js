@@ -95,17 +95,33 @@ const renderError = function (msg) {
   countriesContainer.insertAdjacentText('beforeend', msg);
 };
 const request = fetch('https://restcountries.com/v2/name/portugal');
-console.log(request);
-//consuming promises
+console.lo;
+// helper function
+//error message
+const getJSON = function (url, errorMsg = 'Something went wrong!') {
+  return fetch(url).then(response => {
+    console.log(response);
+    if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
+    return response.json();
+  });
+};
+
+//Country 1
 const getCountryData = function (country) {
-  fetch(`https://restcountries.com/v2/name/${country}`)
-    .then(response => response.json())
+  getJSON(`https://restcountries.com/v2/name/${country}`, 'Country Not Found!!')
     .then(data => {
       renderCountry(data[0]);
       const neighbour = data[0].borders?.[0];
-      return fetch(`https://restcountries.com/v2/alpha/${neighbour}`);
+      //   const neighbour = 'hsadhidf'; // doesn t exist
+      if (!neighbour) throw new Error('No neighbour found!!');
+
+      //country 2
+      return getJSON(
+        `https://restcountries.com/v2/alpha/${neighbour}`,
+        'Country Not Found!!'
+      );
     })
-    .then(response => response.json())
+
     .then(data => renderCountry(data, 'neighbour'))
     .catch(err => {
       console.error(`${err}💥`);
@@ -116,5 +132,41 @@ const getCountryData = function (country) {
     });
 };
 btn.addEventListener('click', function () {
-  getCountryData('portugal');
+  getCountryData('jordan');
 });
+getCountryData('Australia');
+//consuming promises
+// const getCountryData = function (country) {
+//   fetch(`https://restcountries.com/v2/name/${country}`)
+//     .then(response => {
+//       console.log(response);
+//       if (!response.ok)
+//         throw new Error(`Country not found (${response.status})`);
+//       return response.json();
+//     })
+//     .then(data => {
+//       renderCountry(data[0]);
+//       //   const neighbour = data[0].borders?.[0];
+//       const neighbour = 'hsadhidf'; // doesn t exist
+
+//       //country 2
+//       return fetch(`https://restcountries.com/v2/alpha/${neighbour}`);
+//     })
+//     .then(response => {
+//       if (!response.ok)
+//         throw new Error(`Country not found (${response.status})`);
+//       return response.json();
+//     })
+
+//     .then(data => renderCountry(data, 'neighbour'))
+//     .catch(err => {
+//       console.error(`${err}💥`);
+//       renderError(`Something went wrong ${err.message}. Please Try Again!`);
+//     })
+//     .finally(() => {
+//       countriesContainer.style.opacity = 1;
+//     });
+// };
+// btn.addEventListener('click', function () {
+//   getCountryData('jordan');
+// });
