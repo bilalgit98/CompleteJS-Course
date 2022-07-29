@@ -268,45 +268,86 @@ const getJSON = function (url, errorMsg = 'Something went wrong!') {
 
 //coding challenge 2
 
-const wait = function (seconds) {
-  return new Promise(function (resolve) {
-    setTimeout(resolve, seconds * 1000);
-  });
-};
-const imgCotainer = document.querySelector('.images');
+// const wait = function (seconds) {
+//   return new Promise(function (resolve) {
+//     setTimeout(resolve, seconds * 1000);
+//   });
+// };
+// const imgCotainer = document.querySelector('.images');
 
-const createImage = function (imgPath) {
+// const createImage = function (imgPath) {
+//   return new Promise(function (resolve, reject) {
+//     const img = document.createElement('img');
+//     img.src = imgPath;
+//     img.addEventListener('load', function () {
+//       imgCotainer.append(img);
+//       resolve(img);
+//     });
+
+//     img.addEventListener('error', function () {
+//       reject(new Error('image not found'));
+//     });
+//   });
+// };
+
+// let currentImg;
+// createImage('img/img-1.jpg')
+//   .then(img => {
+//     currentImg = img;
+//     console.log('image 1 successfully loaded');
+//     return wait(2);
+//   })
+//   .then(() => {
+//     currentImg.style.display = 'none';
+//     createImage('img/img-2.jpg');
+//   })
+//   .then(img => {
+//     currentImg = img;
+//     console.log('image 2 successfully loaded');
+//     return wait(2);
+//   })
+//   .then(() => {
+//     currentImg.style.display = 'none';
+//   })
+//   .catch(err => console.error(err));
+
+//consuming promises with await/async
+
+// console.log('GETTING CURRENT POSITION');
+
+const getPosition = function () {
   return new Promise(function (resolve, reject) {
-    const img = document.createElement('img');
-    img.src = imgPath;
-    img.addEventListener('load', function () {
-      imgCotainer.append(img);
-      resolve(img);
-    });
-
-    img.addEventListener('error', function () {
-      reject(new Error('image not found'));
-    });
+    navigator.geolocation.getCurrentPosition(resolve, reject);
   });
 };
 
-let currentImg;
-createImage('img/img-1.jpg')
-  .then(img => {
-    currentImg = img;
-    console.log('image 1 successfully loaded');
-    return wait(2);
-  })
-  .then(() => {
-    currentImg.style.display = 'none';
-    createImage('img/img-2.jpg');
-  })
-  .then(img => {
-    currentImg = img;
-    console.log('image 2 successfully loaded');
-    return wait(2);
-  })
-  .then(() => {
-    currentImg.style.display = 'none';
-  })
-  .catch(err => console.error(err));
+const whereAmI = async function (country) {
+  try {
+    //geolocation
+    const pos = await getPosition();
+    const { latitude: lat, longitude: lng } = pos.coords;
+    // reverseGeo
+    const responseGeo = await fetch(
+      `https://geocode.xyz/${lat},${lng}?geoit=json`
+    );
+    if (!responseGeo.ok) throw new Error('Problem getting geolocation data');
+
+    const dataGeo = await responseGeo.json();
+
+    //country data
+
+    const response = await fetch(
+      `https://restcountries.com/v2/name/${dataGeo.country}`
+    );
+    if (!response.ok) throw new Error('Problem getting geolocation data');
+    console.log(response);
+    const data = await response.json();
+    console.log(data);
+    renderCountry(data[0]);
+  } catch (error) {
+    console.error(error);
+    renderError(`${error.message}`);
+  }
+};
+whereAmI();
+console.log('FIRST');
