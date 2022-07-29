@@ -206,13 +206,62 @@ const getJSON = function (url, errorMsg = 'Something went wrong!') {
 // whereAmI(-33.933, 18.474);
 
 //the event loop in practise
-console.log('Test Start');
-setTimeout(() => console.log('0 sec timer'), 0);
+// console.log('Test Start');
+// setTimeout(() => console.log('0 sec timer'), 0);
 
-Promise.resolve('Resolved Promise 1').then(response => console.log(response));
-Promise.resolve('Resolve Promise 2').then(response => {
-  for (let i = 0; i < 100; i++) {}
-  console.log(response);
-});
+// Promise.resolve('Resolved Promise 1').then(response => console.log(response));
+// Promise.resolve('Resolve Promise 2').then(response => {
+//   for (let i = 0; i < 100; i++) {}
+//   console.log(response);
+// });
 
-console.log('TEST END');
+// console.log('TEST END');
+
+//promisifying the geolocation api
+// navigator.geolocation.getCurrentPosition(
+//   position => console.log(position),
+//   err => console.error(err)
+// );
+
+console.log('GETTING CURRENT POSITION');
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+getPosition().then(pos => console.log(pos));
+
+const whereAmI = function () {
+  getPosition()
+    .then(pos => {
+      const { latitude: lat, longitude: lng } = pos.coords;
+
+      return fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+    })
+
+    .then(response => {
+      console.log(response);
+      if (!response.ok)
+        throw new Error(`There is a problem with geocoding ${response.status}`);
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+      console.log(
+        `The Country that you are currently in ${data.city} , ${data.country}`
+      );
+
+      return fetch(`https://restcountries.com/v2/name/${data.country}`);
+    })
+    .then(response => {
+      if (!response.ok)
+        throw new Error(`Country not found (${response.status})`);
+      return response.json();
+    })
+
+    .then(data => renderCountry(data[0]))
+    .catch(err => console.error(`${err.message}💥`));
+};
+btn.addEventListener('click', whereAmI);
