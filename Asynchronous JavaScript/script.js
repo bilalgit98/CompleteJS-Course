@@ -342,12 +342,30 @@ const whereAmI = async function (country) {
     if (!response.ok) throw new Error('Problem getting geolocation data');
     console.log(response);
     const data = await response.json();
-    console.log(data);
     renderCountry(data[0]);
+    return `you are in ${dataGeo.city}, ${dataGeo.country}`;
   } catch (error) {
     console.error(error);
     renderError(`${error.message}`);
+
+    //reject promise from async
+    throw error;
   }
 };
-whereAmI();
-console.log('FIRST');
+
+console.log('1 is going to get the location');
+
+// whereAmI()
+//   .then(city => console.log(city))
+//   .catch(error => console.error(`2 : ${error.message}`))
+//   .finally(() => console.log('2 has finished loading Geolocation Data'));
+
+(async function () {
+  try {
+    const city = await whereAmI();
+    console.log(`2: ${city}`);
+  } catch (error) {
+    console.error(`2: ${error.message}`);
+  }
+  console.log(' 3 : FINISHED GETTING LOCATION!');
+})();
