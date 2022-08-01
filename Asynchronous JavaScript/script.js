@@ -389,32 +389,110 @@ const getJSON = function (url, errorMsg = 'Something went wrong!') {
 
 //promises.race
 
-(async function () {
-  const response = await Promise.race([
-    getJSON(`https://restcountries.com/v2/name/GB`),
-    getJSON(`https://restcountries.com/v2/name/FRA`),
-    getJSON(`https://restcountries.com/v2/name/USA`),
-  ]);
-  console.log(response[0]);
-})();
+// (async function () {
+//   const response = await Promise.race([
+//     getJSON(`https://restcountries.com/v2/name/GB`),
+//     getJSON(`https://restcountries.com/v2/name/FRA`),
+//     getJSON(`https://restcountries.com/v2/name/USA`),
+//   ]);
+//   console.log(response[0]);
+// })();
 
-const timer = function (second) {
-  return new Promise(function (_, reject) {
-    setTimeout(function () {
-      reject(new Error('request took too long '));
-    }, second * 1000);
+// const timer = function (second) {
+//   return new Promise(function (_, reject) {
+//     setTimeout(function () {
+//       reject(new Error('request took too long '));
+//     }, second * 1000);
+//   });
+// };
+
+// Promise.race([getJSON(`https://restcountries.com/v2/name/FRA`), timer(0.1)])
+//   .then(res => console.log(res[0]))
+//   .catch(error => console.error(error));
+
+// //promise.allsettled
+// Promise.allSettled([
+//   Promise.resolve('success'),
+//   Promise.reject('ERROR'),
+//   Promise.resolve('Another Success'),
+// ])
+//   .then(res => console.log(res))
+//   .catch(errors => console.error(errors));
+
+//coding challenge 3
+const wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+const imgCotainer = document.querySelector('.images');
+
+const createImage = function (imgPath) {
+  return new Promise(function (resolve, reject) {
+    const img = document.createElement('img');
+    img.src = imgPath;
+    img.addEventListener('load', function () {
+      imgCotainer.append(img);
+      resolve(img);
+    });
+
+    img.addEventListener('error', function () {
+      reject(new Error('image not found'));
+    });
   });
 };
 
-Promise.race([getJSON(`https://restcountries.com/v2/name/FRA`), timer(0.1)])
-  .then(res => console.log(res[0]))
-  .catch(error => console.error(error));
+// let currentImg;
+// createImage('img/img-1.jpg')
+//   .then(img => {
+//     currentImg = img;
+//     console.log('image 1 successfully loaded');
+//     return wait(2);
+//   })
+//   .then(() => {
+//     currentImg.style.display = 'none';
+//     createImage('img/img-2.jpg');
+//   })
+//   .then(img => {
+//     currentImg = img;
+//     console.log('image 2 successfully loaded');
+//     return wait(2);
+//   })
+//   .then(() => {
+//     currentImg.style.display = 'none';
+//   })
+//   .catch(err => console.error(err));
 
-//promise.allsettled
-Promise.allSettled([
-  Promise.resolve('success'),
-  Promise.reject('ERROR'),
-  Promise.resolve('Another Success'),
-])
-  .then(res => console.log(res))
-  .catch(errors => console.error(errors));
+const loadNpause = async function () {
+  try {
+    //loading images 1
+    let img = await createImage('img/img-1.jpg');
+    console.log('Image 1 Successfully Loaded');
+    await wait(2);
+    img.style.display = 'none';
+
+    //loading images 2
+    img = await createImage('img/img-2.jpg');
+    console.log('Image 2 Successfully Loaded');
+    await wait(2);
+    img.style.display = 'none';
+  } catch (errors) {
+    console.error(errors);
+  }
+};
+
+loadNpause();
+
+//part 2
+const loadAll = async function (imgArr) {
+  try {
+    const imgs = imgArr.map(async img => await createImage(img));
+    console.log(imgs);
+    const imgsEL = await Promise.all(imgs);
+    console.log(imgsEL);
+    imgsEL.forEach(img => img.classList.add('parallel'));
+  } catch (errors) {
+    console.error(errors);
+  }
+};
+loadAll(['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']);
