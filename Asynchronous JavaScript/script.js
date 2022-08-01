@@ -371,18 +371,50 @@ const getJSON = function (url, errorMsg = 'Something went wrong!') {
 // })();
 
 //running promises in parallel
-const get3Countries = async function (country1, country2, country3) {
-  try {
-    const data = await Promise.all([
-      getJSON(`https://restcountries.com/v2/name/${country1}`),
-      getJSON(`https://restcountries.com/v2/name/${country2}`),
-      getJSON(`https://restcountries.com/v2/name/${country3}`),
-    ]);
+// const get3Countries = async function (country1, country2, country3) {
+//   try {
+//     const data = await Promise.all([
+//       getJSON(`https://restcountries.com/v2/name/${country1}`),
+//       getJSON(`https://restcountries.com/v2/name/${country2}`),
+//       getJSON(`https://restcountries.com/v2/name/${country3}`),
+//     ]);
 
-    console.log(data.map(d => d[0].capital));
-  } catch (errors) {
-    console.error(errors);
-  }
+//     console.log(data.map(d => d[0].capital));
+//   } catch (errors) {
+//     console.error(errors);
+//   }
+// };
+
+// get3Countries('GB', 'FRA', 'USA');
+
+//promises.race
+
+(async function () {
+  const response = await Promise.race([
+    getJSON(`https://restcountries.com/v2/name/GB`),
+    getJSON(`https://restcountries.com/v2/name/FRA`),
+    getJSON(`https://restcountries.com/v2/name/USA`),
+  ]);
+  console.log(response[0]);
+})();
+
+const timer = function (second) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error('request took too long '));
+    }, second * 1000);
+  });
 };
 
-get3Countries('GB', 'FRA', 'USA');
+Promise.race([getJSON(`https://restcountries.com/v2/name/FRA`), timer(0.1)])
+  .then(res => console.log(res[0]))
+  .catch(error => console.error(error));
+
+//promise.allsettled
+Promise.allSettled([
+  Promise.resolve('success'),
+  Promise.reject('ERROR'),
+  Promise.resolve('Another Success'),
+])
+  .then(res => console.log(res))
+  .catch(errors => console.error(errors));
