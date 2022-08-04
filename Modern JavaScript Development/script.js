@@ -29,29 +29,40 @@ console.log(shoppingCart.price);
 // console.log(lastPost2);
 
 //the module pattern
-const shoppingCart2 = (function () {
-  const cart = [];
-  const shippingCost = 10;
-  const totalPrice = 237;
-  const totalQuantity = 23;
+// const shoppingCart2 = (function () {
+//   const cart = [];
+//   const shippingCost = 10;
+//   const totalPrice = 237;
+//   const totalQuantity = 23;
 
-  const addToCart = function (product, quantity) {
-    cart.push({ product, quantity });
-    console.log(`${quantity} , ${product} has been added to cart!`);
-  };
+//   const addToCart = function (product, quantity) {
+//     cart.push({ product, quantity });
+//     console.log(`${quantity} , ${product} has been added to cart!`);
+//   };
 
-  const orderedStock = function (product, quantity) {
-    console.log(`${quantity} , ${product} has been Ordered from the supplier`);
-  };
+//   const orderedStock = function (product, quantity) {
+//     console.log(`${quantity} , ${product} has been Ordered from the supplier`);
+//   };
 
-  return {
-    addToCart,
-    cart,
-    shippingCost,
-    totalQuantity,
-    totalPrice,
-  };
-})();
+//   return {
+//     addToCart,
+//     cart,
+//     shippingCost,
+//     totalQuantity,
+//     totalPrice,
+//   };
+// })();
 
-shoppingCart2.addToCart('orange', 5);
-console.log(shoppingCart2);
+// shoppingCart2.addToCart('orange', 5);
+// console.log(shoppingCart2);
+
+
+
+//export
+export.addToCart  = function (product, quantity) {
+        cart.push({ product, quantity });
+        console.log(`${quantity} , ${product} has been added to cart!`);
+      };
+    
+//import
+const { addToCart} = require ('./shoppingCart.js');
