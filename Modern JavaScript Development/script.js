@@ -56,26 +56,13 @@ console.log(shoppingCart.price);
 // shoppingCart2.addToCart('orange', 5);
 // console.log(shoppingCart2);
 
-//commonJS Modules
+
+
 //export
-// export.addToCart  = function (product, quantity) {
-//         cart.push({ product, quantity });
-//         console.log(`${quantity} , ${product} has been added to cart!`);
-//       };
-
-// //import
-// const { addToCart} = require ('./shoppingCart.js');
-
-// import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
-
-// const state = {
-//   cart: [{ product: 'bread', quantity: 6 }],
-//   user: { loggedIn: true },
-// };
-
-// const stateClone = Object.assign({}, state);
-// const stateDeepClone = cloneDeep(state);
-
-// state.user.loggedIn = false;
-// console.log(stateClone);
-// console.log(stateDeepClone);
+export.addToCart  = function (product, quantity) {
+        cart.push({ product, quantity });
+        console.log(`${quantity} , ${product} has been added to cart!`);
+      };
+    
+//import
+const { addToCart} = require ('./shoppingCart.js');
