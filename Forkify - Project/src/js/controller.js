@@ -36,7 +36,8 @@ const controlSearchResults = async function () {
     //load the search results
     await model.loadSearchResults(query);
 
-    resultsView.render(model.state.search.results);
+    // resultsView.render(model.state.search.results);
+    resultsView.render(model.getSearchResultsPage());
     //render result
   } catch (errors) {
     console.log(errors);
