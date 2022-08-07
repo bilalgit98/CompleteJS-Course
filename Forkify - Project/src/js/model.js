@@ -7,9 +7,7 @@ export const state = {
 
 export const loadRecipe = async function (id) {
   try {
-
     const data = await getJSON(`${API_URL}/${id}`);
-  
 
     const { recipe } = data.data;
     state.recipe = {
@@ -25,7 +23,8 @@ export const loadRecipe = async function (id) {
 
     console.log(state.recipe);
   } catch (errors) {
-//temporary error handler
-    console.error(`${errors} - error  `)
+    //temporary error handler
+    console.error(`${errors} - error  `);
+    throw errors;
   }
 };
