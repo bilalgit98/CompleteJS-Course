@@ -1,6 +1,7 @@
 import View from './view.js';
 import icons from 'url:../../img/icons.svg';
 import { Fraction } from 'fractional';
+
 class RecipeView extends View {
   _parentElement = document.querySelector('.recipe');
   _errorMessage = `Sorry we are unable to find the recipe! Please Try Again!!`;
@@ -10,6 +11,15 @@ class RecipeView extends View {
     //Listening For load and hashchange Events
 
     ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
+  }
+
+  addHandlerUpdateServings(handler) {
+    this._parentElement.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn--update-servings');
+      if (!btn) return;
+      const { updateTo } = btn.dataset;
+      if (+updateTo > 0) handler(+updateTo);
+    });
   }
 
   _generateMarkup() {
@@ -41,12 +51,16 @@ class RecipeView extends View {
    <span class="recipe__info-text">servings</span>
 
    <div class="recipe__info-buttons">
-     <button class="btn--tiny btn--increase-servings">
+     <button class="btn--tiny btn--update-servings" data-update-to="${
+       this._data.servings - 1
+     }">
        <svg>
          <use href="${icons}#icon-minus-circle"></use>
        </svg>
      </button>
-     <button class="btn--tiny btn--increase-servings">
+     <button class="btn--tiny btn--update-servings" data-update-to="${
+       this._data.servings + 1
+     }">
        <svg>
          <use href="${icons}#icon-plus-circle"></use>
        </svg>
