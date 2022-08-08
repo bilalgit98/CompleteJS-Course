@@ -105,6 +105,10 @@ const contorlAddRecipe = async function (newRecipe) {
     addRecipeView.renderMessage();
 
     //rendering the bookmark
+    bookmarksView.render(model.state.bookmarks);
+
+    //changing the ID in the URL
+    window.history.pushState(null, '', `#${model.state.recipe.id}`);
 
     //close the form window
     setTimeout(function () {
